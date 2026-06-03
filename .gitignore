@@ -1,0 +1,6 @@
+.env
+
+.venv-echo/
+
+__pycache__/
+*.pyc
