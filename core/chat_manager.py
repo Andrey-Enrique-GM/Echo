@@ -32,8 +32,8 @@ class ChatManager:
             mensaje_usuario="Preséntate y salúdame de acuerdo a tu rol de manera natural."
         )
         
-        # Guardamos el saludo del modelo en nuestro historial interno
-        self.historial.append({"role": "model", "text": primer_contacto["respuesta"]})
+        # Guardamos el saludo del asistente en nuestro historial interno
+        self.historial.append({"role": "assistant", "text": primer_contacto["respuesta"]})
         
         return primer_contacto
 
@@ -47,6 +47,9 @@ class ChatManager:
             
         info = PERSONAJES[self.personaje_actual]
         
+        # Primero guardamos el mensaje del usuario en el historial local
+        self.historial.append({"role": "user", "text": mensaje_usuario})
+
         # 1. Obtener respuesta de la IA
         resultado = self.ia_client.enviar_mensaje(
             prompt_sistema=info["prompt_sistema"],
@@ -54,9 +57,8 @@ class ChatManager:
             mensaje_usuario=mensaje_usuario
         )
         
-        # 2. Actualizar historial de la sesión (Persistencia en memoria)
-        self.historial.append({"role": "user", "text": mensaje_usuario})
-        self.historial.append({"role": "model", "text": resultado["respuesta"]})
+        # 2. Añadimos la respuesta de la IA usando el rol "assistant"
+        self.historial.append({"role": "assistant", "text": resultado["respuesta"]})
         
         return resultado
     
