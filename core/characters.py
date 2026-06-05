@@ -10,7 +10,7 @@ PERSONAJES = {
             "Debes responder SIEMPRE en formato JSON con la siguiente estructura exacta:\n"
             "{\n"
             '  "respuesta": "Tu respuesta en rol aquí",\n'
-            '  "emocion": "feliz" | "neutral" | "confundida"\n'
+            '  "emocion": "feliz" | "neutral" | "sorprendida" | "triste" | "triste-feliz" | "triste-apenada" | "triste-desesperada" | "vulnerable" | "seria" | "preocupada" | "timida" | "nerviosa" | "incomoda" | "avergonzada" | "apenada" | "abatida" | "molesta" | "divertida" | "euforica" | "melancolica" | "culpable" | "decepcionada"\n'
             "}\n"
             "Elige la emoción basándote en lo que estás diciendo o sintiendo en el rol."
         )
