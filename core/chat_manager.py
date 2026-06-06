@@ -29,7 +29,7 @@ class ChatManager:
         primer_contacto = self.ia_client.enviar_mensaje(
             prompt_sistema=info["prompt_sistema"],
             historial=self.historial,
-            mensaje_usuario="Preséntate y salúdame de acuerdo a tu rol de manera natural."
+            mensaje_usuario="Preséntate y salúdame de acuerdo a tu personaje de manera natural siguiendo el rol."
         )
         
         # Guardamos el saludo del asistente en nuestro historial interno

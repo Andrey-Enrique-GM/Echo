@@ -1,7 +1,9 @@
-import os
-import json
 from groq import Groq
 from dotenv import load_dotenv
+import os
+import json
+    
+#load_dotenv()
 
 class IAClient:
     """Cliente encargado de la comunicación directa con la API de Inteligencia Artificial de Groq."""
@@ -48,7 +50,6 @@ class IAClient:
         })
 
         try:
-            # 3. Cambiamos la llamada al método de generación de Groq
             response = self.client.chat.completions.create(
                 model=self.model_name,
                 messages=messages,
