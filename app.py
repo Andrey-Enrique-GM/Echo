@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, jsonify
+from flask import Flask, redirect, render_template, request, jsonify
 from dotenv import load_dotenv
 from core.characters import PERSONAJES
 from core.chat_manager import ChatManager
@@ -25,6 +25,28 @@ def index():
     return render_template('index.html', personajes=PERSONAJES)
 
 
+# Ruta para la pantalla de chat, donde se desarrolla el roleplay
+@app.route('/chat')
+def chat_view():
+    """Vista del Roleplay: Renderiza la pantalla del chat (chat.html)."""
+    # Si intentan entrar a /chat sin haber elegido un personaje, los mandamos al menú
+    if not chat_manager.personaje_actual:
+        return redirect('/')
+    
+    id_p = chat_manager.personaje_actual
+    
+    # Obtenemos el último mensaje del historial (que será el saludo generado en /seleccionar)
+    # Si por alguna razón está vacío, dejamos un saludo genérico de respaldo
+    saludo = chat_manager.historial[-1]["text"] if chat_manager.historial else "¡Hola!"
+    
+    return render_template(
+        'chat.html', 
+        id_personaje=id_p,
+        saludo_inicial=saludo,
+        emocion_inicial="neutral" # Arranca en neutral por defecto
+    )
+
+
 # Endpoint para seleccionar un personaje y obtener su saludo inicial
 @app.route('/seleccionar', methods=['POST'])
 def seleccionar():
@@ -36,13 +58,9 @@ def seleccionar():
         return jsonify({"status": "error", "message": "Personaje no válido"}), 400
         
     try:
-        resultado = chat_manager.seleccionar_personaje(id_personaje)
-        return jsonify({
-            "status": "success",
-            "respuesta": resultado["respuesta"],
-            "emocion": resultado["emocion"],
-            "personaje": id_personaje
-        })
+        # El manager inicializa el bot y guarda el saludo en memoria viva
+        chat_manager.seleccionar_personaje(id_personaje)
+        return jsonify({"status": "success"})
     except Exception as e:
         return jsonify({"status": "error", "message": str(e)}), 500
 

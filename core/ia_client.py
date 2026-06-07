@@ -2,8 +2,6 @@ from groq import Groq
 from dotenv import load_dotenv
 import os
 import json
-    
-#load_dotenv()
 
 class IAClient:
     """Cliente encargado de la comunicación directa con la API de Inteligencia Artificial de Groq."""

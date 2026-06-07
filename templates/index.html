@@ -3,11 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ECHO - IA Roleplay Chat</title>
+    <title>ECHO - Selección de Personaje</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
 </head>
 <body>
 
+    <!-- Pantalla de selección de personaje -->
     <div id="menu-seleccion" class="contenedor">
         <h1>Elige el personaje con el que quieres hablar</h1>
         <div class="botones-personajes">
@@ -16,24 +17,6 @@
                     {{ info.nombre }}
                 </button>
             {% endfor %}
-        </div>
-    </div>
-
-    <div id="pantalla-roleplay" class="contenedor" style="display: none;">
-        <div class="escenario">
-            <div class="zona-personaje">
-                <img id="avatar-personaje" src="" alt="Avatar Personaje">
-            </div>
-            
-            <div class="zona-dialogo">
-                <div id="globo-texto" class="globo">
-                    </div>
-            </div>
-        </div>
-
-        <div class="barra-input">
-            <input type="text" id="input-mensaje" placeholder="Escribe tu respuesta aquí..." onkeydown="if(event.key === 'Enter') enviarMensaje()">
-            <button onclick="enviarMensaje()">Enviar</button>
         </div>
     </div>
 
