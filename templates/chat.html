@@ -8,33 +8,34 @@
 </head>
 <body>
 
-    <!-- Pantalla de roleplay -->
-    <div id="pantalla-roleplay" class="contenedor">
-        <div style="text-align: left; margin-bottom: 10px;">
-            <a href="/" style="color: #3182ce; text-decoration: none; font-size: 14px;">← Cambiar de personaje</a>
-        </div>
+    <!-- Menú superior con botón de regreso y logo -->
+    <header class="menu-superior">
+        <a href="/" class="btn-regresar">← Cambiar de personaje</a>
+        <span class="logo-echo">Echo</span>
+    </header>
 
-        <div class="escenario">
-            <div class="zona-personaje">
-                <!-- Inyectamos dinámicamente el data-personaje y la imagen inicial -->
-                <img id="avatar-personaje" 
-                     data-personaje="{{ id_personaje }}" 
-                     src="/static/images/characters/{{ id_personaje }}/{{ id_personaje }}-{{ emocion_inicial }}.png" 
-                     alt="Avatar Personaje">
-            </div>
-            
-            <div class="zona-dialogo">
-                <!-- Inyectamos el saludo inicial que ya generó Groq -->
-                <div id="globo-texto" class="globo">{{ saludo_inicial }}</div>
-            </div>
+    <!-- Escenario principal con avatar del personaje y globo de diálogo -->
+    <main class="escenario">
+        <div class="zona-personaje">
+            <img id="avatar-personaje" 
+                 data-personaje="{{ id_personaje }}" 
+                 src="/static/images/characters/{{ id_personaje }}/{{ id_personaje }}-{{ emocion_inicial }}.png" 
+                 alt="Avatar Personaje">
         </div>
+        
+        <!-- Globo de diálogo con mensaje inicial -->
+        <div class="zona-dialogo">
+            <div id="globo-texto" class="globo">{{ saludo_inicial }}</div>
+        </div>
+    </main>
 
-        <!-- Barra de input para enviar mensajes -->
+    <!-- Menú inferior con barra de entrada para el usuario -->
+    <footer class="menu-inferior">
         <div class="barra-input">
-            <input type="text" id="input-mensaje" placeholder="Escribe tu respuesta aquí..." onkeydown="if(event.key === 'Enter') enviarMensaje()">
+            <input type="text" id="input-mensaje" placeholder="Escribe tu respuesta aquí..." onkeydown="if(event.key === 'Enter') enviarMensaje()" autofocus>
             <button onclick="enviarMensaje()">Enviar</button>
         </div>
-    </div>
+    </footer>
 
     <script src="{{ url_for('static', filename='js/main.js') }}"></script>
 </body>

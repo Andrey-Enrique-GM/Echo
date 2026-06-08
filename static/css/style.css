@@ -1,3 +1,4 @@
+/* --- ESTILOS GENERALES Y BASE --- */
 body {
     margin: 0;
     padding: 0;
@@ -5,14 +6,15 @@ body {
     background-color: #1e222b;
     color: #ffffff;
     display: flex;
-    justify-content: center;
-    align-items: center;
+    flex-direction: column;
     height: 100vh;
+    overflow: hidden;
 }
 
 .contenedor {
     width: 90%;
     max-width: 800px;
+    margin: auto;
     text-align: center;
 }
 
@@ -34,75 +36,131 @@ body {
 }
 
 /* Vista 2: Escenario del Roleplay */
-.escenario {
+/* Marco Superior */
+.menu-superior {
+    height: 50px;
+    background-color: #1e222b;
     display: flex;
-    align-items: center;
     justify-content: space-between;
-    background-color: #2d3748;
-    padding: 20px;
-    border-radius: 10px;
-    height: 400px;
-    margin-bottom: 20px;
+    align-items: center;
+    padding: 0 25px;
+    box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.3);
+    z-index: 10;
 }
 
+.btn-regresar {
+    color: #3182ce;
+    text-decoration: none;
+    font-size: 15px;
+    font-weight: bold;
+    transition: color 0.2s;
+}
+
+.btn-regresar:hover {
+    color: #63b3ed;
+}
+
+.logo-echo {
+    font-size: 20px;
+    font-weight: bold;
+    letter-spacing: 1px;
+    color: #a0aec0;
+}
+
+/* El Escenario Central (El fondo editable) */
+.escenario {
+    flex: 1; /* Absorbe todo el espacio vertical disponible */
+    display: flex;
+    align-items: flex-end; /* Alinea al personaje al suelo de la pantalla */
+    justify-content: space-between;
+    background-color: #2d3748; /* Tu color base actual, listo para soportar imágenes de fondo */
+    padding: 0 60px;
+    position: relative;
+}
+
+/* Ajustes del Personaje */
 .zona-personaje {
-    width: 40%;
-    height: 100%;
+    width: 45%;
+    height: 95%; /* Que use casi todo el alto del escenario */
     display: flex;
     justify-content: center;
-    align-items: center;
+    align-items: flex-end;
 }
 
 .zona-personaje img {
+    height: 90%; /* Forzamos a que el personaje escale a lo grande de forma vertical */
     max-width: 100%;
-    max-height: 100%;
-    object-fit: contain;
+    object-fit: contain; /* Evita que la imagen se deforme o pixele agresivamente */
 }
 
+/* Ajustes del Globo de Texto */
 .zona-dialogo {
-    width: 55%;
+    width: 50%;
+    height: 100%;
     display: flex;
-    align-items: center;
+    align-items: center; /* Centrado vertical con respecto al personaje */
 }
 
-/* El globo de texto del personaje */
 .globo {
     background-color: #ffffff;
     color: #2d3748;
-    padding: 20px;
+    padding: 25px;
     border-radius: 15px;
     text-align: left;
-    font-size: 16px;
-    line-height: 1.4;
+    font-size: 18px; /* Un poco más grande para facilitar la lectura */
+    line-height: 1.5;
     width: 100%;
-    box-shadow: 0px 4px 6px rgba(0,0,0,0.1);
-    min-height: 60px;
+    box-shadow: 0px 6px 15px rgba(0, 0, 0, 0.2);
+    min-height: 80px;
+    max-height: 60%; /* Evita que textos gigantes rompan la caja */
+    overflow-y: auto;
 }
 
-/* Barra de herramientas inferior */
-.barra-input {
+/* Marco Inferior */
+.menu-inferior {
+    height: 80px;
+    background-color: #1e222b;
     display: flex;
-    gap: 10px;
+    justify-content: center;
+    align-items: center;
+    padding: 0 20px;
+    box-shadow: 0px -2px 10px rgba(0, 0, 0, 0.3);
+    z-index: 10;
+}
+
+.barra-input {
+    width: 100%;
+    max-width: 900px;
+    display: flex;
+    gap: 15px;
 }
 
 .barra-input input {
     flex: 1;
-    padding: 12px;
+    padding: 14px;
     font-size: 16px;
     border: none;
-    border-radius: 5px;
-    background-color: #4a5568;
+    border-radius: 8px;
+    background-color: #2d3748;
     color: white;
+    outline: none;
+    transition: background 0.2s;
+}
+
+.barra-input input:focus {
+    background-color: #4a5568;
 }
 
 .barra-input button {
-    padding: 12px 25px;
+    padding: 14px 35px;
     font-size: 16px;
+    font-weight: bold;
     border: none;
     background-color: #3182ce;
     color: white;
-    border-radius: 5px;
+    border-radius: 8px;
     cursor: pointer;
+    transition: background 0.2s;
 }
 
 .barra-input button:hover {
