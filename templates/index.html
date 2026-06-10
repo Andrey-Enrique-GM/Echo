@@ -8,13 +8,26 @@
 </head>
 <body>
 
+    <!-- Fondo de burbujasss -->
+    <div id="burbujas-container"></div>
+
     <!-- Pantalla de selección de personaje -->
-    <div id="menu-seleccion" class="contenedor">
-        <h1>Elige el personaje con el que quieres hablar</h1>
-        <div class="botones-personajes">
+    <div id="menu-seleccion" class="contenedor-seleccion">
+        <header class="bienvenida">
+            <h1>Bienvenido a Echo</h1>
+            <p>Una aplicación web de roleplay chat con Inteligencia Artificial</p>
+            <p>Elige un personaje para comenzar la historia:</p>
+        </header>
+
+        <div class="tarjetas-personajes">
             {% for id_personaje, info in personajes.items() %}
-                <button onclick="seleccionarPersonaje('{{ id_personaje }}')">
-                    {{ info.nombre }}
+                <button class="tarjeta-btn" onclick="seleccionarPersonaje('{{ id_personaje }}')">
+                    <div class="tarjeta-imagen">
+                        <img src="/static/images/characters/{{ id_personaje }}/{{ id_personaje }}-neutral.png" alt="Sprite {{ info.nombre }}">
+                    </div>
+                    <div class="tarjeta-nombre">
+                        {{ info.nombre }}
+                    </div>
                 </button>
             {% endfor %}
         </div>

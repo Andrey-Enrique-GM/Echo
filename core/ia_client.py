@@ -11,8 +11,8 @@ class IAClient:
         """Inicializa el cliente de Groq usando las variables de entorno."""
         # Al dejarlo vacío, Groq busca automáticamente la variable GROQ_API_KEY en tu archivo .env
         self.client = Groq()
-        # Usamos el modelo rápido, optimizado y con un límite gratuito muy amplio
-        self.model_name = "llama-3.1-8b-instant"
+        # Ahora usamos un modelo mas reciente y potente
+        self.model_name = "openai/gpt-oss-120b"
 
 
     def enviar_mensaje(self, prompt_sistema: str, historial: list, mensaje_usuario: str) -> dict:

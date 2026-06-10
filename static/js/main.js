@@ -71,3 +71,35 @@ function actualizarInterfaz(texto, emocion) {
         avatarImg.src = nuevaRuta;
     }
 }
+
+
+/**
+ * --- EFECTO DE FONDOS ANIMADOS (BURBUJAS) ---
+ */
+function inicializarBurbujasProyecto() {
+    const contenedor = document.getElementById("burbujas-container");
+    
+    // Si no estamos en el menú de selección, no hace nada
+    if (!contenedor) return; 
+
+    function crearBurbuja() {
+        const div = document.createElement("div");
+        div.classList.add("burbuja");
+        div.style.left = `${Math.random() * 100}%`;
+        const size = Math.random() * 15 + 10;
+        div.style.width = `${size}px`;
+        div.style.height = `${size}px`;
+        div.style.animationDuration = `${Math.random() * 3 + 2}s`;
+        contenedor.appendChild(div);
+
+        // Control de limpieza de memoria
+        div.addEventListener("animationend", () => {
+            div.remove();
+        });
+    }
+
+    setInterval(crearBurbuja, 300);
+}
+
+// Se ejecuta de forma segura al cargar la página
+window.addEventListener("DOMContentLoaded", inicializarBurbujasProyecto);

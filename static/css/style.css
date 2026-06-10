@@ -11,29 +11,110 @@ body {
     overflow: hidden;
 }
 
-.contenedor {
+.contenedor-seleccion {
     width: 90%;
     max-width: 800px;
     margin: auto;
     text-align: center;
 }
 
-/* Vista 1: Menu */
-.botones-personajes button {
-    background-color: #4a5568;
-    color: white;
-    border: none;
-    padding: 15px 30px;
-    margin: 10px;
-    font-size: 18px;
-    cursor: pointer;
-    border-radius: 5px;
-    transition: background 0.2s;
+
+
+/* Vista 1: Menu de Selección de Personaje */
+.bienvenida {
+    margin-bottom: 40px;
 }
 
-.botones-personajes button:hover {
+.bienvenida h1 {
+    font-size: 32px;
+    margin-bottom: 10px;
+}
+
+.destaque-echo {
+    color: #3182ce;
+    font-weight: bold;
+}
+
+.bienvenida p {
+    font-size: 16px;
+    color: #a0aec0;
+    max-width: 600px;
+    margin: 0 auto;
+    line-height: 1.5;
+}
+
+/* Contenedor Flexbox para alinear las tarjetas de lado a lado */
+.tarjetas-personajes {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    flex-wrap: wrap;
+    margin-top: 20px;
+}
+
+/* La tarjeta botón completa */
+.tarjeta-btn {
+    background-color: #2d3748;
+    border: 2px solid #4a5568;
+    border-radius: 12px;
+    width: 200px;
+    height: 320px;
+    cursor: pointer;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    padding: 0;
+    transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+/* Efectos al pasar el mouse (Hover) */
+.tarjeta-btn:hover {
+    transform: translateY(-8px);
+    border-color: #3182ce;
+    box-shadow: 0px 8px 20px rgba(49, 130, 206, 0.2);
+}
+
+/* Contenedor interno del Sprite */
+.tarjeta-imagen {
+    flex: 1;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    padding-top: 15px;
+    background-color: #232d3f; /* Un fondo ligeramente más oscuro para resaltar el sprite */
+}
+
+.tarjeta-imagen img {
+    height: 90%;
+    max-width: 90%;
+    object-fit: contain;
+    transition: transform 0.2s ease;
+}
+
+/* Efecto opcional: el personaje se asoma un poquito en hover */
+.tarjeta-btn:hover .tarjeta-imagen img {
+    transform: scale(1.05);
+}
+
+/* Bloque inferior del Nombre */
+.tarjeta-nombre {
+    background-color: #1a202c;
+    color: #ffffff;
+    width: 100%;
+    padding: 15px 0;
+    font-size: 18px;
+    font-weight: bold;
+    text-align: center;
+    border-top: 2px solid #4a5568;
+    transition: background-color 0.2s ease;
+}
+
+.tarjeta-btn:hover .tarjeta-nombre {
     background-color: #3182ce;
 }
+
+
 
 /* Vista 2: Escenario del Roleplay */
 /* Marco Superior */
@@ -165,4 +246,47 @@ body {
 
 .barra-input button:hover {
     background-color: #2b6cb0;
+}
+
+
+
+/* --- COMPONENTE ANIMADO DE BURBUJAS --- */
+/* Asegura que el contenido del menú quede por encima de las burbujas */
+.contenedor-seleccion {
+    position: relative;
+    z-index: 2;
+}
+
+#burbujas-container {
+    position: fixed;
+    inset: 0;
+    overflow: hidden;
+    pointer-events: none;
+    z-index: 1; /* Al fondo */
+}
+
+.burbuja {
+    position: absolute;
+    bottom: -50px;
+    left: 0;
+    background-color: rgba(10, 235, 255, 0.445); /* Tu color celeste */
+    border-radius: 50%;
+    opacity: 0;
+    pointer-events: none;
+    animation-name: moverArriba; 
+    animation-timing-function: linear;
+}
+
+@keyframes moverArriba {
+    0% {
+        opacity: 0;
+        transform: translateY(0);
+    }
+    25% {
+        opacity: 1;
+    }
+    100% {
+        opacity: 0;
+        transform: translateY(-100vh);
+    }
 }
