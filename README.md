@@ -14,3 +14,4 @@ Para que este proyecto funcione de forma fluida y gratuita, se hace uso de los s
 * `Groq Cloud API`: Utilizado como el motor de Inteligencia Artificial principal para la generación de texto a gran velocidad. Se encarga de procesar el rol de los personajes y devolver las respuestas estructuradas nativamente en formato JSON (incluyendo el texto del diálogo y el tipo de emoción).
 * `Sprites de Sayori (Doki Doki Literature Club)`: Todos los derechos de los diseños artísticos, expresiones y assets visuales del personaje Sayori pertenecen a **Dan Salvato** y al equipo de **Team Salvato**. Utilizados bajo fines puramente recreativos y de desarrollo personal.
 * `Sprites de Akira`: Los recursos gráficos utilizados para la identidad visual, expresiones y variantes del personaje Akira pertenecen a **Sitian** (yo), personaje original del WEBTOON **Musashi**.
+* `Efecto Burbujas`: Desarrollado originalmente por Ulises Basualdo.
