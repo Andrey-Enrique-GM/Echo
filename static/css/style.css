@@ -150,51 +150,116 @@ body {
 
 /* El Escenario Central (El fondo editable) */
 .escenario {
-    flex: 1; /* Absorbe todo el espacio vertical disponible */
+    flex: 1;
     display: flex;
-    align-items: flex-end; /* Alinea al personaje al suelo de la pantalla */
     justify-content: space-between;
-    background-color: #2d3748; /* Tu color base actual, listo para soportar imágenes de fondo */
-    padding: 0 60px;
+    align-items: stretch;
+    background-color: #1e222b;
     position: relative;
+    padding: 0;
+    overflow: hidden; /* Evita que los hijos empujen hacia abajo el layout */
 }
 
-/* Ajustes del Personaje */
+/* PANEL IZQUIERDO: Caja de personaje y fondo */
 .zona-personaje {
-    width: 45%;
-    height: 95%; /* Que use casi todo el alto del escenario */
+    width: 60%;
+    height: 100%;
     display: flex;
     justify-content: center;
-    align-items: flex-end;
+    align-items: flex-end; /* El personaje toca el suelo del panel */
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    position: relative;
+    border-right: 2px solid #1e222b;
 }
 
 .zona-personaje img {
-    height: 90%; /* Forzamos a que el personaje escale a lo grande de forma vertical */
+    height: 95%;
     max-width: 100%;
-    object-fit: contain; /* Evita que la imagen se deforme o pixele agresivamente */
+    object-fit: contain;
+    z-index: 2;
 }
 
-/* Ajustes del Globo de Texto */
+/* PANEL DERECHO: Caja de chat e Historial */
 .zona-dialogo {
-    width: 50%;
+    width: 40%;
     height: 100%;
+    background-color: #2d3748;
     display: flex;
-    align-items: center; /* Centrado vertical con respecto al personaje */
+    flex-direction: column;
+    padding: 20px 15px;
+    box-sizing: border-box;
+    overflow: hidden; /* Evita que el contenido del historial empuje hacia abajo el layout */
 }
 
-.globo {
-    background-color: #ffffff;
-    color: #2d3748;
-    padding: 25px;
-    border-radius: 15px;
-    text-align: left;
-    font-size: 18px; /* Un poco más grande para facilitar la lectura */
-    line-height: 1.5;
+/* Contenedor del Historial que maneja el Scroll Independiente */
+.historial-contenedor {
+    flex: 1;
     width: 100%;
-    box-shadow: 0px 6px 15px rgba(0, 0, 0, 0.2);
-    min-height: 80px;
-    max-height: 60%; /* Evita que textos gigantes rompan la caja */
-    overflow-y: auto;
+    max-height: 100%; /* Forzamos a que respete el espacio disponible */
+    overflow-y: auto; /* Activa el scroll vertical */
+    padding-right: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px; /* Separación entre bloques de mensajes */
+    box-sizing: border-box;
+}
+
+/* Personalización del Scrollbar para que se vea estético e integrado */
+.historial-contenedor::-webkit-scrollbar {
+    width: 6px;
+}
+.historial-contenedor::-webkit-scrollbar-thumb {
+    background-color: #4a5568;
+    border-radius: 4px;
+}
+
+/* Estructura de cada bloque de mensaje */
+.mensaje-bloque {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    animation: fadeInMsg 0.25s ease-out forwards;
+}
+
+/* Animación sutil de aparición */
+@keyframes fadeInMsg {
+    from { opacity: 0; transform: translateY(5px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* Etiquetas de nombres */
+.nombre-etiqueta {
+    font-size: 14px;
+    font-weight: bold;
+    margin-bottom: 5px;
+    color: #a0aec0; /* Gris claro por defecto */
+}
+
+/* Cambios de color según el emisor */
+.usuario-msg .nombre-etiqueta {
+    color: #4299e1; /* Azul para identificar mensajes del usuario */
+}
+
+.personaje-msg .nombre-etiqueta {
+    color: #ed64a6; /* Un rosa vibrante para los mensajes del personaje */
+}
+
+/* La burbuja de texto plano */
+.burbuja-texto-rp {
+    color: #e2e8f0;
+    font-size: 16px;
+    line-height: 1.6;
+    word-break: break-word;
+    white-space: pre-wrap; /* Mantiene saltos de línea si la IA los manda */
+}
+
+/* Formato para las acciones encerradas en asteriscos (*Estrechar su mano*) */
+.burbuja-texto-rp strong em {
+    color: #cbd5e0;
+    font-weight: 600;
+    font-style: italic;
 }
 
 /* Marco Inferior */

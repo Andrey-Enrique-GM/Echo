@@ -17,7 +17,7 @@
 
     <!-- Escenario principal con avatar del personaje y globo de diálogo -->
     <main class="escenario">
-        <div class="zona-personaje">
+        <div class="zona-personaje" style="background-image: url('/static/images/backgrounds/bg-campus-aula.jpg');">
             <img id="avatar-personaje" 
                  data-personaje="{{ id_personaje }}" 
                  src="/static/images/characters/{{ id_personaje }}/{{ id_personaje }}-{{ emocion_inicial }}.png" 
@@ -26,7 +26,12 @@
         
         <!-- Globo de diálogo con mensaje inicial -->
         <div class="zona-dialogo">
-            <div id="globo-texto" class="globo">{{ saludo_inicial }}</div>
+            <div id="historial-chat" class="historial-contenedor">
+                <div class="mensaje-bloque personaje-msg">
+                    <span class="nombre-etiqueta">{{ id_personaje | capitalize }}</span>
+                    <div class="burbuja-texto-rp">{{ saludo_inicial }}</div>
+                </div>
+            </div>
         </div>
     </main>
 

@@ -28,7 +28,16 @@ async function seleccionarPersonaje(idPersonaje) {
 
 
 /**
- * Captura el texto del usuario, lo envía a Flask y procesa la respuesta del personaje.
+ * Procesa el texto para convertir *acciones* en Negrita + Cursiva
+ */
+function formatearTextoRoleplay(texto) {
+    // Busca texto entre asteriscos y lo envuelve en tags HTML de estilo
+    return texto.replace(/\*(.*?)\*/g, '<strong><em>*$1*</em></strong>');
+}
+
+
+/**
+ * Captura el texto del usuario, lo envia a Flask, crea su burbuja de inmediato y consulta a la IA.
  */
 async function enviarMensaje() {
     const input = document.getElementById('input-mensaje');
@@ -36,8 +45,35 @@ async function enviarMensaje() {
     
     if (!mensaje) return;
 
+    // 1. Limpiar el input
     input.value = '';
-    document.getElementById('globo-texto').innerText = "Escribiendo...";
+    
+    // 2. Renderizar el mensaje del usuario en el historial
+    const historial = document.getElementById('historial-chat');
+    const usuarioBloque = document.createElement('div');
+    usuarioBloque.classList.add('mensaje-bloque', 'usuario-msg');
+    
+    // Formateamos por si el usuario también escribe acciones entre asteriscos
+    const textoFormateadoUser = formatearTextoRoleplay(mensaje);
+    usuarioBloque.innerHTML = `
+        <span class="nombre-etiqueta">You</span>
+        <div class="burbuja-texto-rp">${textoFormateadoUser}</div>
+    `;
+    historial.appendChild(usuarioBloque);
+    
+    // Scroll inmediato con delay para asegurar la posición
+    setTimeout(() => { historial.scrollTop = historial.scrollHeight; }, 50);
+
+    // 3. Crear indicador temporal de "Escribiendo..."
+    const escribiendoBloque = document.createElement('div');
+    escribiendoBloque.id = 'indicador-escribiendo';
+    escribiendoBloque.classList.add('mensaje-bloque', 'personaje-msg');
+    escribiendoBloque.innerHTML = `
+        <span class="nombre-etiqueta">${personajeActivo.charAt(0).toUpperCase() + personajeActivo.slice(1)}</span>
+        <div class="burbuja-texto-rp"><i>Escribiendo...</i></div>
+    `;
+    historial.appendChild(escribiendoBloque);
+    historial.scrollTop = historial.scrollHeight;
 
     try {
         const response = await fetch('/enviar', {
@@ -48,24 +84,52 @@ async function enviarMensaje() {
 
         const data = await response.json();
         
+        // Quitar indicador de carga
+        const indicador = document.getElementById('indicador-escribiendo');
+        if (indicador) indicador.remove();
+
         if (data.respuesta) {
             actualizarInterfaz(data.respuesta, data.emocion);
         } else {
-            document.getElementById('globo-texto').innerText = "Error al recibir respuesta.";
+            alert("Error al recibir respuesta de la IA.");
         }
     } catch (error) {
         console.error("Error:", error);
-        document.getElementById('globo-texto').innerText = "Error de conexión.";
+        const indicador = document.getElementById('indicador-escribiendo');
+        if (indicador) indicador.remove();
     }
 }
 
 
 /**
- * Modifica dinámicamente el globo de texto y la ruta de la imagen del personaje.
+ * Añade la respuesta de la IA al historial con su respectivo formato y cambia la emoción.
  */
 function actualizarInterfaz(texto, emocion) {
-    document.getElementById('globo-texto').innerText = texto;
+    const historial = document.getElementById('historial-chat');
+    if (!historial) return;
+
+    // Crear el bloque de mensaje formateado para el personaje
+    const personajeBloque = document.createElement('div');
+    personajeBloque.classList.add('mensaje-bloque', 'personaje-msg');
     
+    // Aplicamos el formateador de asteriscos antes de insertar al HTML
+    const textoFormateado = formatearTextoRoleplay(texto);
+
+    const nombreFormateado = personajeActivo.charAt(0).toUpperCase() + personajeActivo.slice(1);
+
+    personajeBloque.innerHTML = `
+        <span class="nombre-etiqueta">${nombreFormateado}</span>
+        <div class="burbuja-texto-rp">${textoFormateado}</div>
+    `;
+    
+    historial.appendChild(personajeBloque);
+    
+    // Espera a que el DOM se dibuje al 100%
+    setTimeout(() => {
+        historial.scrollTop = historial.scrollHeight;
+    }, 100);
+    
+    // Cambiar sprite de emoción
     if (avatarImg) {
         const nuevaRuta = `/static/images/characters/${personajeActivo}/${personajeActivo}-${emocion}.png`;
         avatarImg.src = nuevaRuta;
