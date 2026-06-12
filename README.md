@@ -15,3 +15,4 @@ Para que este proyecto funcione de forma fluida y gratuita, se hace uso de los s
 * `Sprites de Sayori (Doki Doki Literature Club)`: Todos los derechos de los diseños artísticos, expresiones y assets visuales del personaje Sayori pertenecen a **Dan Salvato** y al equipo de **Team Salvato**. Utilizados bajo fines puramente recreativos y de desarrollo personal.
 * `Sprites de Akira`: Los recursos gráficos utilizados para la identidad visual, expresiones y variantes del personaje Akira pertenecen a **Sitian** (yo), personaje original del WEBTOON **Musashi**.
 * `Backgrounds`: Todos los derechos de las fotografias pertenecen a **Jinzou Tamashii** desde su perfil de DeviantArt. Utilizados bajo fines puramente recreativos y de desarrollo personal.
+* `Efecto Burbujas`: Desarrollado originalmente por Ulises Basualdo.
