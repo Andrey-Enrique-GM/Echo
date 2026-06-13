@@ -1,6 +1,10 @@
 // Obtener el ID del personaje directamente desde el HTML inyectado por Flask
 const avatarImg = document.getElementById('avatar-personaje');
 const personajeActivo = avatarImg ? avatarImg.getAttribute('data-personaje') : "";
+// Contenedor del escenario visual
+const contenedorFondo = document.getElementById('contenedor-fondo-rp');
+
+let fondoBloqueadoPorUsuario = false;
 
 
 /**
@@ -84,12 +88,12 @@ async function enviarMensaje() {
 
         const data = await response.json();
         
-        // Quitar indicador de carga
         const indicador = document.getElementById('indicador-escribiendo');
         if (indicador) indicador.remove();
 
         if (data.respuesta) {
-            actualizarInterfaz(data.respuesta, data.emocion);
+            // Pasamos tres parámetros ahora: respuesta, emocion y escenario
+            actualizarInterfaz(data.respuesta, data.emocion, data.escenario);
         } else {
             alert("Error al recibir respuesta de la IA.");
         }
@@ -104,7 +108,7 @@ async function enviarMensaje() {
 /**
  * Añade la respuesta de la IA al historial con su respectivo formato y cambia la emoción.
  */
-function actualizarInterfaz(texto, emocion) {
+function actualizarInterfaz(texto, emocion, escenarioIA) {
     const historial = document.getElementById('historial-chat');
     if (!historial) return;
 
@@ -114,7 +118,6 @@ function actualizarInterfaz(texto, emocion) {
     
     // Aplicamos el formateador de asteriscos antes de insertar al HTML
     const textoFormateado = formatearTextoRoleplay(texto);
-
     const nombreFormateado = personajeActivo.charAt(0).toUpperCase() + personajeActivo.slice(1);
 
     personajeBloque.innerHTML = `
@@ -129,11 +132,76 @@ function actualizarInterfaz(texto, emocion) {
         historial.scrollTop = historial.scrollHeight;
     }, 100);
     
-    // Cambiar sprite de emoción
+    // 1. CONTROL AUTOMÁTICO DE EMOCIÓN (Sprite)
     if (avatarImg) {
         const nuevaRuta = `/static/images/characters/${personajeActivo}/${personajeActivo}-${emocion}.png`;
         avatarImg.src = nuevaRuta;
     }
+
+    // 2. CONTROL HÍBRIDO DE ESCENARIO (Fondo)
+    // Solo cambia si el usuario no ha anclado un escenario manualmente
+    if (!fondoBloqueadoPorUsuario && escenarioIA && contenedorFondo) {
+        contenedorFondo.style.backgroundImage = `url('/static/images/backgrounds/bg-${escenarioIA}.png')`;
+    }
+}
+
+
+/**
+ * Abre el modal de selección de fondos
+ */
+function abrirModalFondos() {
+    const modal = document.getElementById('modal-fondos');
+    if (modal) modal.classList.add('activo');
+}
+
+
+/**
+ * Cierra el modal de selección si se hace clic fuera del recuadro blanco
+ */
+function cerrarModalFondos(event) {
+    if (event.target.classList.contains('modal-overlay')) {
+        document.getElementById('modal-fondos').classList.remove('activo');
+    }
+}
+
+
+/**
+ * Cambia el fondo manualmente y bloquea la automatización
+ */
+function seleccionarFondoManual(nombreEscenario) {
+    if (!contenedorFondo) return;
+    
+    // Cambiar la imagen de fondo
+    contenedorFondo.style.backgroundImage = `url('/static/images/backgrounds/bg-${nombreEscenario}.png')`;
+    
+    // Activar el bloqueo
+    fondoBloqueadoPorUsuario = true;
+    
+    // Cambiar el diseño del botón superior para indicar que está fijado
+    const btnFondo = document.getElementById('btn-cambiar-fondo');
+    if (btnFondo) {
+        btnFondo.innerHTML = "📌";
+        btnFondo.classList.add('fijado');
+    }
+
+    // Cerrar el modal
+    document.getElementById('modal-fondos').classList.remove('activo');
+}
+
+
+/**
+ * Devuelve el control a la IA para que cambie el escenario dinámicamente
+ */
+function liberarControlIA() {
+    fondoBloqueadoPorUsuario = false;
+    
+    const btnFondo = document.getElementById('btn-cambiar-fondo');
+    if (btnFondo) {
+        btnFondo.innerHTML = "🖼️";
+        btnFondo.classList.remove('fijado');
+    }
+    
+    document.getElementById('modal-fondos').classList.remove('activo');
 }
 
 

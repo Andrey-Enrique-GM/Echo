@@ -141,6 +141,153 @@ body {
     color: #63b3ed;
 }
 
+/* Botón manual inferior */
+.barra-input .btn-fondo-manual {
+    background-color: #2d3748; /* Gris integrado */
+    border: 1px solid #4a5568;  /* Borde sutil */
+    color: #a0aec0;
+    padding: 0 20px;
+    font-size: 20px;
+    border-radius: 8px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s ease;
+}
+
+.barra-input .btn-fondo-manual:hover {
+    background-color: #4a5568;
+    border-color: #718096;
+    color: #ffffff;
+}
+
+/* Estado cuando el usuario fijó el fondo */
+.barra-input .btn-fondo-manual.fijado {
+    background-color: #4a5568; 
+    border-color: #a0aec0; 
+    box-shadow: 0 0 8px rgba(255, 255, 255, 0.1); 
+    animation: pulseGlow 2s infinite; 
+}
+
+/* Animación para el botón fijado */
+@keyframes pulseGlow {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.03); }
+    100% { transform: scale(1); }
+}
+
+/* Estructura del Modal Flotante */
+.modal-overlay {
+    position: fixed;
+    inset: 0;
+    background-color: rgba(0, 0, 0, 0.75);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 100;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.2s ease;
+}
+
+.modal-overlay.activo {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.modal-contenido {
+    background-color: #1e222b;
+    border: 2px solid #4a5568;
+    border-radius: 12px;
+    width: 90%;
+    max-width: 500px;
+    padding: 25px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+    text-align: center;
+}
+
+.modal-contenido h3 {
+    margin-top: 0;
+    font-size: 22px;
+    color: #ffffff;
+}
+
+.modal-subtitulo {
+    font-size: 14px;
+    color: #a0aec0;
+    margin-bottom: 20px;
+}
+
+/* Cuadrícula de opciones */
+.grid-fondos {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+    max-height: 250px;
+    overflow-y: auto;
+    padding-right: 5px;
+    margin-bottom: 20px;
+}
+
+.opcion-fondo {
+    background-color: #2d3748;
+    border: 1px solid #4a5568;
+    color: #ffffff;
+    padding: 12px;
+    border-radius: 8px;
+    font-size: 14px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.opcion-fondo:hover {
+    background-color: #3182ce;
+    border-color: #63b3ed;
+    transform: translateY(-2px);
+}
+
+/* Pie del modal */
+.modal-pie {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    border-top: 1px solid #4a5568;
+    padding-top: 15px;
+}
+
+.btn-liberar-fondo {
+    background-color: #232d3f;
+    border: 1px solid #1a202c;
+    color: #e2e8f0;
+    padding: 10px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 13px;
+    transition: background 0.2s;
+}
+
+.btn-liberar-fondo:hover {
+    background-color: #2d3748;
+    color: #63b3ed;
+}
+
+.btn-cerrar-modal {
+    background-color: #e53e3e;
+    color: white;
+    border: none;
+    padding: 10px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: bold;
+    transition: background 0.2s;
+}
+
+.btn-cerrar-modal:hover {
+    background-color: #c53030;
+}
+
 .logo-echo {
     font-size: 20px;
     font-weight: bold;
@@ -297,7 +444,7 @@ body {
     background-color: #4a5568;
 }
 
-.barra-input button {
+.barra-input button:not(.btn-fondo-manual) {
     padding: 14px 35px;
     font-size: 16px;
     font-weight: bold;
@@ -309,7 +456,7 @@ body {
     transition: background 0.2s;
 }
 
-.barra-input button:hover {
+.barra-input button:not(.btn-fondo-manual):hover {
     background-color: #2b6cb0;
 }
 
