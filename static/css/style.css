@@ -11,13 +11,6 @@ body {
     overflow: hidden;
 }
 
-.contenedor-seleccion {
-    width: 90%;
-    max-width: 800px;
-    margin: auto;
-    text-align: center;
-}
-
 
 
 /* Vista 1: Menu de Selección de Personaje */
@@ -28,11 +21,6 @@ body {
 .bienvenida h1 {
     font-size: 32px;
     margin-bottom: 10px;
-}
-
-.destaque-echo {
-    color: #3182ce;
-    font-weight: bold;
 }
 
 .bienvenida p {
@@ -78,7 +66,6 @@ body {
 .tarjeta-imagen {
     flex: 1;
     width: 100%;
-    height: 265px; /* Deja espacio para el nombre abajo */
     display: flex;
     justify-content: center;
     align-items: center;
@@ -329,7 +316,6 @@ body {
 
 .zona-personaje img {
     height: 95%;
-    max-width: 100%;
     object-fit: contain;
     z-index: 2;
 }
@@ -468,11 +454,212 @@ body {
 
 
 
+/* --- BOTÓN FLOTANTE ( ? ) --- */
+.btn-ayuda-flotante {
+    position: fixed;
+    bottom: 25px;
+    right: 25px;
+    width: 45px;
+    height: 45px;
+    background-color: #2d3748;
+    border: 2px solid #4a5568;
+    color: #ffffff;
+    border-radius: 50%;
+    font-size: 20px;
+    font-weight: bold;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 90; /* Por debajo de las overlays pero encima del fondo */
+    transition: all 0.2s ease;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+}
+
+.btn-ayuda-flotante:hover {
+    background-color: #3182ce;
+    border-color: #63b3ed;
+    transform: scale(1.08);
+    box-shadow: 0 0 12px rgba(49, 130, 206, 0.4);
+}
+
+/* Modificaciones y extras para el modal de información */
+.modal-contenido.modal-info-ancho {
+    max-width: 600px;
+    text-align: left; /* Alineación de lectura cómoda */
+    max-height: 85vh;
+    display: flex;
+    flex-direction: column;
+}
+
+.modal-info-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #4a5568;
+    padding-bottom: 12px;
+    margin-bottom: 15px;
+}
+
+.modal-info-header h2 {
+    margin: 0;
+    font-size: 24px;
+    color: #ffffff;
+}
+
+.version-tag {
+    background-color: #232d3f;
+    border: 1px solid #3182ce;
+    color: #63b3ed;
+    padding: 3px 8px;
+    font-size: 12px;
+    font-weight: bold;
+    border-radius: 12px;
+}
+
+.modal-info-cuerpo {
+    overflow-y: auto;
+    padding-right: 5px;
+}
+
+/* Scrollbar interno para el cuerpo del modal */
+.modal-info-cuerpo::-webkit-scrollbar {
+    width: 5px;
+}
+.modal-info-cuerpo::-webkit-scrollbar-thumb {
+    background-color: #4a5568;
+    border-radius: 3px;
+}
+
+.info-seccion {
+    margin-bottom: 22px;
+}
+
+.info-seccion h3 {
+    font-size: 16px;
+    color: #a0aec0;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 8px;
+    margin-top: 0;
+}
+
+.info-seccion p {
+    font-size: 14px;
+    color: #e2e8f0;
+    line-height: 1.6;
+    margin: 0;
+}
+
+/* Etiquetas de tecnologías */
+.tech-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.tag-tech {
+    background-color: #2d3748;
+    border: 1px solid #4a5568;
+    color: #cbd5e0;
+    font-size: 13px;
+    padding: 5px 10px;
+    border-radius: 6px;
+}
+
+/* Tabla de Créditos */
+.tabla-creditos {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 14px;
+    margin-top: 5px;
+}
+
+.tabla-creditos th, .tabla-creditos td {
+    padding: 10px;
+    text-align: left;
+    border-bottom: 1px solid #2d3748;
+}
+
+.tabla-creditos th {
+    background-color: #232d3f;
+    color: #a0aec0;
+    font-weight: bold;
+}
+
+.tabla-creditos td {
+    color: #e2e8f0;
+}
+
+.modal-info-pie {
+    border-top: 1px solid #4a5568;
+    padding-top: 15px;
+    display: flex;
+    justify-content: flex-end;
+}
+
+/* Estilos para estructurar el formato de listas del modal de información */
+.lista-info {
+    list-style-type: none;
+    padding-left: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.lista-info li {
+    font-size: 14px;
+    color: #e2e8f0;
+    line-height: 1.6;
+    position: relative;
+    padding-left: 15px;
+}
+
+/* Un pequeño marcador personalizado estilo bullet*/
+.lista-info li::before {
+    content: "•";
+    color: #3182ce;
+    font-weight: bold;
+    position: absolute;
+    left: 0;
+    top: 0;
+}
+
+.lista-info code {
+    background-color: #232d3f;
+    color: #63b3ed;
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-family: monospace;
+    font-size: 13px;
+}
+
+/* Estilos para los títulos-enlace en los créditos */
+.enlace-credito {
+    color: #ffffff;
+    font-weight: bold;
+    text-decoration: none; /* Quita el subrayado por defecto */
+    transition: color 0.2s ease, text-decoration 0.2s ease;
+}
+
+/* Efecto al pasar el cursor sobre el título */
+.enlace-credito:hover {
+    color: #63b3ed; /* Cambia al azul claro */
+    text-underline-offset: 4px;
+}
+
+
+
 /* --- COMPONENTE ANIMADO DE BURBUJAS --- */
 /* Asegura que el contenido del menú quede por encima de las burbujas */
 .contenedor-seleccion {
     position: relative;
     z-index: 2;
+    width: 90%;
+    max-width: 800px;
+    margin: auto;
+    text-align: center;
 }
 
 #burbujas-container {

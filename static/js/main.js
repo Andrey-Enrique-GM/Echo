@@ -205,6 +205,32 @@ function liberarControlIA() {
 }
 
 
+// Funciones para el Modal de Información de Proyecto
+function abrirModalInfo() {
+    const modal = document.getElementById('modal-info-proyecto');
+    if (modal) {
+        modal.classList.add('activo');
+    }
+}
+
+
+function cerrarModalInfo() {
+    const modal = document.getElementById('modal-info-proyecto');
+    if (modal) {
+        modal.classList.remove('activo');
+    }
+}
+
+
+// Cierra el modal si el usuario hace clic fuera de la caja de contenido
+function cerrarModalInfoExterno(event) {
+    const modal = document.getElementById('modal-info-proyecto');
+    if (event.target === modal) {
+        cerrarModalInfo();
+    }
+}
+
+
 /**
  * --- EFECTO DE FONDOS ANIMADOS (BURBUJAS) ---
  */
