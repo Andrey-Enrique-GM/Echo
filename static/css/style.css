@@ -649,6 +649,44 @@ body {
     text-underline-offset: 4px;
 }
 
+/* --- BOTÓN FLOTANTE DE GITHUB --- */
+.link-github-flotante {
+    position: fixed;
+    bottom: 25px;
+    left: 25px;
+    height: 45px;
+    padding: 0 16px;
+    background-color: #2d3748;
+    border: 2px solid #4a5568;
+    color: #ffffff;
+    border-radius: 24px; /* Forma de píldora estilizada */
+    font-size: 14px;
+    font-weight: bold;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px; /* Espacio entre el logo de gato y el texto */
+    z-index: 90;
+    transition: all 0.2s ease;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+}
+
+.link-github-flotante:hover {
+    background-color: #24292e; /* El color oscuro característico de GitHub */
+    border-color: #63b3ed;
+    transform: scale(1.05);
+    box-shadow: 0 0 12px rgba(99, 179, 237, 0.3);
+}
+
+.link-github-flotante svg {
+    transition: transform 0.2s ease;
+}
+
+.link-github-flotante:hover svg {
+    transform: rotate(-8deg) scale(1.1);
+}
+
 
 
 /* --- COMPONENTE ANIMADO DE BURBUJAS --- */
