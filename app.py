@@ -18,11 +18,18 @@ chat_manager = ChatManager()
 
 
 
-# Ruta principal que muestra el menú de selección de personajes
+# Ruta principal que muestra el menú principal
 @app.route('/')
 def index():
-    """Vista principal: Renderiza el menú de selección de personajes."""
-    return render_template('index.html', personajes=PERSONAJES)
+    """Vista principal: Renderiza el menú de inicio."""
+    return render_template('index.html')
+
+
+# Ruta para la pantalla de selección de personajes
+@app.route('/menu')
+def menu():
+    """Vista del menú: Renderiza el menú de selección de personajes."""
+    return render_template('menu.html', personajes=PERSONAJES)
 
 
 # Ruta para la pantalla de chat, donde se desarrolla el roleplay

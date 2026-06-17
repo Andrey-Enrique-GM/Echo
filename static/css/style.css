@@ -13,7 +13,96 @@ body {
 
 
 
-/* Vista 1: Menu de Selección de Personaje */
+/* --- Vista 1: Menu Principal --- */
+/* Contenedor central que abraza todo el espacio vertical y horizontal */
+.hero-landing {
+    position: relative;
+    z-index: 2; /* Por encima de las burbujas */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    flex: 1; /* Ocupa todo el alto disponible del body */
+    text-align: center;
+    gap: 20px;
+}
+
+/* Caja del logo con animación de flotación suave */
+.contenedor-logo-landing {
+    width: 300px;
+    height: 300px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.logo-animado {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    filter: drop-shadow(0 0 15px rgba(99, 179, 237, 0.4)); /* Brillo celeste sutil */
+    animation: flotarLogo 4s ease-in-out infinite;
+}
+
+/* El texto de ECHO abajo del logo */
+.titulo-landing {
+    font-size: 54px;
+    font-weight: 900;
+    letter-spacing: 8px; /* Espaciado entre letras */
+    margin: 0;
+    color: #ffffff;
+    text-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+}
+
+/* Botón interactivo "Comenzar" */
+.btn-comenzar-landing {
+    display: inline-block;
+    margin-top: 15px;
+    padding: 14px 45px;
+    font-size: 18px;
+    font-weight: bold;
+    letter-spacing: 1px;
+    text-decoration: none;
+    color: #ffffff;
+    background-color: #3182ce;
+    border: 2px solid #4a5568;
+    border-radius: 30px; /* Forma de óvalo/píldora */
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+    transition: all 0.25s ease;
+}
+
+/* Hover interactivo del botón central */
+.btn-comenzar-landing:hover {
+    background-color: #2b6cb0;
+    border-color: #63b3ed;
+    transform: translateY(-3px);
+    box-shadow: 0 6px 20px rgba(49, 130, 206, 0.4);
+    letter-spacing: 2px;
+}
+
+.btn-comenzar-landing:active {
+    transform: translateY(-1px);
+}
+
+/* --- Animacion de flotación --- */
+@keyframes flotarLogo {
+    0% {
+        transform: translateY(0px);
+        filter: drop-shadow(0 0 15px rgba(99, 179, 237, 0.3));
+    }
+    50% {
+        transform: translateY(-12px);
+        filter: drop-shadow(0 0 25px rgba(99, 179, 237, 0.6)); /* El brillo aumenta arriba */
+    }
+    100% {
+        transform: translateY(0px);
+        filter: drop-shadow(0 0 15px rgba(99, 179, 237, 0.3));
+    }
+}
+
+
+
+/* Vista 2: Menu de Selección de Personaje */
 .bienvenida {
     margin-bottom: 40px;
 }
@@ -109,7 +198,7 @@ body {
 
 
 
-/* Vista 2: Escenario del Roleplay */
+/* Vista 3: Escenario del Roleplay */
 /* Marco Superior */
 .menu-superior {
     height: 50px;
@@ -123,15 +212,25 @@ body {
 }
 
 .btn-regresar {
-    color: #3182ce;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 6px 14px;
+    font-size: 14px;
+    font-weight: 500;
+    color: #a0aec0;
     text-decoration: none;
-    font-size: 15px;
-    font-weight: bold;
-    transition: color 0.2s;
+    background-color: rgba(255, 255, 255, 0.05); /* Fondo */
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 20px; /* Bordes redondeados */
+    transition: all 0.25s ease;
 }
 
 .btn-regresar:hover {
-    color: #63b3ed;
+    color: #ffffff; /* El texto se ilumina */
+    background-color: rgba(255, 255, 255, 0.12);
+    border-color: rgba(10, 235, 255, 0.4);
+    transform: translateX(-2px); /* Un leve desplazamiento hacia la izquierda simulando el regreso */
 }
 
 /* Botón manual inferior */
@@ -282,10 +381,20 @@ body {
 }
 
 .logo-echo {
+    display: flex;
+    align-items: center;
+    gap: 8px; /* Espaciado entre 'ECHO' y el icono */
     font-size: 20px;
     font-weight: bold;
     letter-spacing: 1px;
     color: #a0aec0;
+}
+
+.mini-logo {
+    width: 24px;
+    height: 24px;
+    object-fit: contain;
+    filter: drop-shadow(0 0 4px rgba(255, 20, 147, 0.4)); 
 }
 
 /* El Escenario Central (El fondo editable) */

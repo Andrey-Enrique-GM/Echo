@@ -11,8 +11,11 @@
 
     <!-- Menú superior con botón de regreso y logo -->
     <header class="menu-superior">
-        <a href="/" class="btn-regresar">← Cambiar de personaje</a>
-        <span class="logo-echo">Echo</span>
+        <a href="/menu" class="btn-regresar">← Cambiar de personaje</a>
+        <div class="logo-echo">
+            <span>Echo</span>
+            <img src="{{ url_for('static', filename='images/site/favicon.png') }}" alt="Logo Echo" class="mini-logo">
+        </div>
     </header>
 
     <!-- Escenario principal con avatar del personaje y globo de diálogo -->

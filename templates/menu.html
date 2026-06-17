@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ECHO</title>
+    <title>ECHO - Selección de Personaje</title>
     <link rel="shortcut icon" href="{{ url_for('static', filename='images/site/favicon.png') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
 </head>
@@ -12,23 +12,26 @@
     <!-- Fondo de burbujasss -->
     <div id="burbujas-container"></div>
 
-    <!-- Pantalla de bienvenida / landing page -->
-    <main class="hero-landing">
-        <div class="contenedor-logo-landing">
-            <img src="{{ url_for('static', filename='images/site/echo.png') }}" alt="Logo de Echo" class="logo-animado">
+    <!-- Pantalla de selección de personaje -->
+    <div id="menu-seleccion" class="contenedor-seleccion">
+        <header class="bienvenida">
+            <h1>Bienvenido a Echo</h1>
+            <p>Elige un personaje para comenzar la historia:</p>
+        </header>
+
+        <div class="tarjetas-personajes">
+            {% for id_personaje, info in personajes.items() %}
+                <button class="tarjeta-btn" onclick="seleccionarPersonaje('{{ id_personaje }}')">
+                    <div class="tarjeta-imagen">
+                        <img src="/static/images/characters/{{ id_personaje }}/{{ id_personaje }}-neutral.png" alt="Sprite {{ info.nombre }}">
+                    </div>
+                    <div class="tarjeta-nombre">
+                        {{ info.nombre }}
+                    </div>
+                </button>
+            {% endfor %}
         </div>
-        
-        <h1 class="titulo-landing">ECHO</h1>
-        <p class="subtitulo-landing">Una aplicación web de chat roleplay con Inteligencia Artificial</p>
-        
-        <a href="{{ url_for('menu') }}" class="btn-comenzar-landing">
-            <span>Comenzar</span>
-            <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: middle; margin-left: 5px;">
-                <line x1="5" y1="12" x2="19" y2="12"></line>
-                <polyline points="12 5 19 12 12 19"></polyline>
-            </svg>
-        </a>
-    </main>
+    </div>
 
     <!-- Botón Flotante de mi GitHub -->
     <a href="https://github.com/Andrey-Enrique-GM/Echo" target="_blank" class="link-github-flotante" title="Ver repositorio en GitHub">
