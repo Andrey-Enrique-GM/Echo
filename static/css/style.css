@@ -821,7 +821,7 @@ body {
     position: absolute;
     bottom: -50px;
     left: 0;
-    background-color: rgba(10, 235, 255, 0.445); /* Tu color celeste */
+    background-color: rgba(10, 235, 255, 0.445);
     border-radius: 50%;
     opacity: 0;
     pointer-events: none;
