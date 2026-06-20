@@ -13,6 +13,7 @@ class IAClient:
         self.client = Groq()
         # Ahora usamos un modelo mas reciente y potente
         self.model_name = "openai/gpt-oss-120b"
+        #self.model_name = "qwen/qwen3-32b"
 
 
     def enviar_mensaje(self, prompt_sistema: str, historial: list, mensaje_usuario: str) -> dict:

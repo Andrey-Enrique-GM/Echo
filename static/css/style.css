@@ -488,6 +488,16 @@ body {
     z-index: 2;
 }
 
+/* Transición suave para los sprites de los personajes */
+.tarjeta-imagen img, #avatar-personaje {
+    transition: opacity 0.2s ease-in-out, transform 0.2s ease-in-out;
+}
+
+/* Si cambia el fondo dinámicamente en el contenedor principal */
+#burbujas-container, .seccion-menu-scroll, #contenedor-fondo-rp {
+    transition: background-image 0.5s ease-in-out;
+}
+
 /* PANEL DERECHO: Caja de chat e Historial */
 .zona-dialogo {
     width: 40%;
@@ -564,9 +574,13 @@ body {
 
 /* Formato para las acciones encerradas en asteriscos (*Estrechar su mano*) */
 .burbuja-texto-rp strong em {
-    color: #cbd5e0;
-    font-weight: 600;
+    color: #a0aec0;
+    font-weight: 400;
     font-style: italic;
+    font-family: 'Georgia', serif; /* Una fuente literaria para la narrativa */
+    letter-spacing: 0.3px;
+    display: inline-block;
+    padding: 2px 0;
 }
 
 /* Marco Inferior */
@@ -816,6 +830,8 @@ body {
     color: #63b3ed; /* Cambia al azul claro */
     text-underline-offset: 4px;
 }
+
+
 
 /* --- BOTÓN FLOTANTE DE GITHUB --- */
 .link-github-flotante {

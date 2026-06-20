@@ -106,43 +106,98 @@ async function enviarMensaje() {
 
 
 /**
- * Añade la respuesta de la IA al historial con su respectivo formato y cambia la emoción.
+ * Añade la respuesta de la IA al historial con su respectivo formato y cambia la emoción de forma suave.
  */
 function actualizarInterfaz(texto, emocion, escenarioIA) {
     const historial = document.getElementById('historial-chat');
     if (!historial) return;
 
-    // Crear el bloque de mensaje formateado para el personaje
+    // 1. CONTROL AUTOMÁTICO DE EMOCIÓN (Avatar)
+    if (avatarImg) {
+        const nuevaRuta = `/static/images/characters/${personajeActivo}/${personajeActivo}-${emocion}.png`;
+        
+        // Convertimos la ruta actual a una URL relativa limpia para poder comparar correctamente
+        const rutaActual = avatarImg.getAttribute('src');
+
+        // SOLO cambiamos si la emoción nueva es distinta a la que ya está puesta
+        if (rutaActual !== nuevaRuta) {
+            // Creamos una imagen temporal que irá al frente con la nueva expresión
+            const nuevaImgClone = document.createElement('img');
+            nuevaImgClone.src = nuevaRuta;
+            nuevaImgClone.style.position = 'absolute';
+            nuevaImgClone.style.bottom = '0';
+            nuevaImgClone.style.height = avatarImg.style.height || '95%';
+            nuevaImgClone.style.objectFit = 'contain';
+            nuevaImgClone.style.zIndex = '3';
+            nuevaImgClone.style.opacity = '0';
+            nuevaImgClone.style.transition = 'opacity 0.4s ease-in-out';
+
+            // La añadimos al contenedor detrás del escenario
+            avatarImg.parentElement.appendChild(nuevaImgClone);
+
+            // Forzamos el reflow del navegador para que detecte la opacidad en 0 antes de la transición
+            window.getComputedStyle(nuevaImgClone).opacity;
+
+            // Hacemos aparecer la nueva imagen suavemente
+            nuevaImgClone.style.opacity = '1';
+
+            // Al terminar la transición, actualizamos el avatar original y limpiamos el clon
+            setTimeout(() => {
+                avatarImg.src = nuevaRuta;
+                nuevaImgClone.remove();
+            }, 400);
+        }
+    }
+
+    // 2. CONTROL HÍBRIDO DE ESCENARIO (Fondo)
+    if (!fondoBloqueadoPorUsuario && escenarioIA && contenedorFondo) {
+        contenedorFondo.style.backgroundImage = `url('/static/images/backgrounds/bg-${escenarioIA}.png')`;
+    }
+
+    // 3. CREAR EL BLOQUE DE MENSAJE E INICIAR LA MÁQUINA DE ESCRIBIR
     const personajeBloque = document.createElement('div');
     personajeBloque.classList.add('mensaje-bloque', 'personaje-msg');
     
-    // Aplicamos el formateador de asteriscos antes de insertar al HTML
-    const textoFormateado = formatearTextoRoleplay(texto);
     const nombreFormateado = personajeActivo.charAt(0).toUpperCase() + personajeActivo.slice(1);
 
     personajeBloque.innerHTML = `
         <span class="nombre-etiqueta">${nombreFormateado}</span>
-        <div class="burbuja-texto-rp">${textoFormateado}</div>
+        <div class="burbuja-texto-rp"></div>
     `;
     
     historial.appendChild(personajeBloque);
+    const burbujaTexto = personajeBloque.querySelector('.burbuja-texto-rp');
     
-    // Espera a que el DOM se dibuje al 100%
-    setTimeout(() => {
-        historial.scrollTop = historial.scrollHeight;
-    }, 100);
-    
-    // 1. CONTROL AUTOMÁTICO DE EMOCIÓN (Sprite)
-    if (avatarImg) {
-        const nuevaRuta = `/static/images/characters/${personajeActivo}/${personajeActivo}-${emocion}.png`;
-        avatarImg.src = nuevaRuta;
-    }
+    efectoMaquinaEscribir(burbujaTexto, texto, 20, () => {
+        burbujaTexto.innerHTML = formatearTextoRoleplay(texto);
+    });
+}
 
-    // 2. CONTROL HÍBRIDO DE ESCENARIO (Fondo)
-    // Solo cambia si el usuario no ha anclado un escenario manualmente
-    if (!fondoBloqueadoPorUsuario && escenarioIA && contenedorFondo) {
-        contenedorFondo.style.backgroundImage = `url('/static/images/backgrounds/bg-${escenarioIA}.png')`;
+
+/**
+ * Imprime texto enriquecido con HTML letra por letra en un contenedor específico.
+ */
+function efectoMaquinaEscribir(elemento, texto, velocidad = 20, callback = null) {
+    elemento.innerHTML = ""; // Limpiamos el contenedor
+    let i = 0;
+    const historial = document.getElementById('historial-chat');
+    
+    function escribir() {
+        if (i < texto.length) {
+            elemento.textContent += texto.charAt(i); // Usamos textContent para evitar conflictos con caracteres especiales
+            i++;
+            
+            if (historial) {
+                historial.scrollTop = historial.scrollHeight;
+            }
+            
+            setTimeout(escribir, velocidad);
+        } else {
+            // ¡Terminó de escribir! Ejecutamos el formateo final
+            if (callback) callback();
+        }
     }
+    escribir();
 }
 
 
