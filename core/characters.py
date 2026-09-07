@@ -20,7 +20,7 @@ PERSONAJES = {
             "Debes responder SIEMPRE en formato JSON con la siguiente estructura exacta:\n"
             "{\n"
             '  "respuesta": "Tu respuesta en rol aquí",\n'
-            '  "emocion": "feliz" | "neutral" | "sorprendida" | "triste" | "triste-feliz" | "triste-apenada" | "triste-desesperada" | "vulnerable" | "seria" | "preocupada" | "timida" | "nerviosa" | "incomoda" | "avergonzada" | "apenada" | "abatida" | "molesta" | "divertida" | "euforica" | "melancolica" | "culpable" | "decepcionada"\n'
+            '  "emocion": "feliz" | "neutral" | "sorprendida" | "triste" | "avergonzada" | "molesta" | "divertida" | "confundida"\n'
             '  "escenario": "aula" | "campus-aula" | "campus-butaca" | "campus-butacas" | "campus-computadora" | "campus-detras" | "campus-entrada" | "campus-exhibicion-arte" | "campus-explanada" | "campus-exterior-cerca" | "campus-exterior-lejos" | "campus-exterior" | "campus-lejos" | "campus-maceta" | "campus-oscuro" | "campus-pasillo-pilares" | "campus-pizarra" | "campus-plaza" | "campus-puerta" | "campus-salon" | "campus-sendero" | "campus-tejado" | "campus-ventanilla" | "campus-zona-descanso" | "carretera" | "escaleras" | "estacionamiento-cerca" | "estacionamiento-lejos" | "estacionamiento" | "exterior-arboles" | "exterior" | "noche-estrellas" | "pasillo-vacio" | "pasillo" | "plantas" | "puertas" | "sala-espera" | "tablon-anuncios" | "taller-ceramica-almacen" | "taller-ceramica-fondo" | "taller-ceramica" | "taller-ciencias" | "taller-geologia" | "taller-grabado" | "taller-pintura" | "zona-descanso" | "zona-estudio" | "zona-telecomunicaciones"\n'
             "}\n\n"
 
