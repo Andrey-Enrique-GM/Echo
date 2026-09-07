@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,6 +8,7 @@
     <link rel="shortcut icon" href="{{ url_for('static', filename='images/site/favicon.png') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
 </head>
+
 <body>
 
     <!-- Menú superior con botón de regreso y logo -->
@@ -21,13 +23,13 @@
     <!-- Escenario principal con avatar del personaje y globo de diálogo -->
     <main class="escenario">
         <!-- Agregamos un ID a la zona del personaje para manipular su background de forma directa -->
-        <div id="contenedor-fondo-rp" class="zona-personaje" style="background-image: url('/static/images/backgrounds/bg-campus-aula.png');">
-            <img id="avatar-personaje" 
-                 data-personaje="{{ id_personaje }}" 
-                 src="/static/images/characters/{{ id_personaje }}/{{ id_personaje }}-{{ emocion_inicial }}.png" 
-                 alt="Avatar Personaje">
+        <div id="contenedor-fondo-rp" class="zona-personaje"
+            style="background-image: url('/static/images/backgrounds/bg-campus-aula.png');">
+            <img id="avatar-personaje" data-personaje="{{ id_personaje }}"
+                src="/static/images/characters/{{ id_personaje }}/{{ id_personaje }}-{{ emocion_inicial }}.webp"
+                alt="Avatar Personaje">
         </div>
-        
+
         <!-- Globo de diálogo con mensaje inicial -->
         <div class="zona-dialogo">
             <div id="historial-chat" class="historial-contenedor">
@@ -42,7 +44,8 @@
     <!-- Menú inferior con barra de entrada para el usuario -->
     <footer class="menu-inferior">
         <div class="barra-input">
-            <input type="text" id="input-mensaje" placeholder="Escribe tu respuesta aquí..." onkeydown="if(event.key === 'Enter') enviarMensaje()" autofocus>
+            <input type="text" id="input-mensaje" placeholder="Escribe tu respuesta aquí..."
+                onkeydown="if(event.key === 'Enter') enviarMensaje()" autofocus>
             <button onclick="enviarMensaje()">Enviar</button>
             <button id="btn-cambiar-fondo" class="btn-fondo-manual" onclick="abrirModalFondos()">🖼️</button>
         </div>
@@ -52,8 +55,9 @@
     <div id="modal-fondos" class="modal-overlay" onclick="cerrarModalFondos(event)">
         <div class="modal-contenido">
             <h3>Seleccionar Escenario</h3>
-            <p class="modal-subtitulo">Elige un fondo manualmente. Al hacerlo, se bloqueará el cambio automático de la IA.</p>
-            
+            <p class="modal-subtitulo">Elige un fondo manualmente. Al hacerlo, se bloqueará el cambio automático de la
+                IA.</p>
+
             <div class="grid-fondos">
                 <button class="opcion-fondo" onclick="seleccionarFondoManual('aula')">Aula</button>
                 <button class="opcion-fondo" onclick="seleccionarFondoManual('campus-aula')">Campus Aula</button>
@@ -62,24 +66,32 @@
                 <button class="opcion-fondo" onclick="seleccionarFondoManual('pasillo')">Pasillo</button>
                 <button class="opcion-fondo" onclick="seleccionarFondoManual('escaleras')">Escaleras</button>
                 <button class="opcion-fondo" onclick="seleccionarFondoManual('campus-exterior')">Exterior</button>
-                <button class="opcion-fondo" onclick="seleccionarFondoManual('noche-estrellas')">Noche de Estrellas</button>
+                <button class="opcion-fondo" onclick="seleccionarFondoManual('noche-estrellas')">Noche de
+                    Estrellas</button>
                 <button class="opcion-fondo" onclick="seleccionarFondoManual('zona-estudio')">Zona Estudio</button>
                 <button class="opcion-fondo" onclick="seleccionarFondoManual('campus-entrada')">Entrada</button>
-                <button class="opcion-fondo" onclick="seleccionarFondoManual('campus-zona-descanso')">Zona Descanso</button>
-                <button class="opcion-fondo" onclick="seleccionarFondoManual('taller-ceramica')">Taller Cerámica</button>
-                <button class="opcion-fondo" onclick="seleccionarFondoManual('taller-ciencias')">Taller Ciencias</button>
-                <button class="opcion-fondo" onclick="seleccionarFondoManual('taller-geologia')">Taller Geología</button>
+                <button class="opcion-fondo" onclick="seleccionarFondoManual('campus-zona-descanso')">Zona
+                    Descanso</button>
+                <button class="opcion-fondo" onclick="seleccionarFondoManual('taller-ceramica')">Taller
+                    Cerámica</button>
+                <button class="opcion-fondo" onclick="seleccionarFondoManual('taller-ciencias')">Taller
+                    Ciencias</button>
+                <button class="opcion-fondo" onclick="seleccionarFondoManual('taller-geologia')">Taller
+                    Geología</button>
                 <button class="opcion-fondo" onclick="seleccionarFondoManual('taller-grabado')">Taller Grabado</button>
                 <button class="opcion-fondo" onclick="seleccionarFondoManual('taller-pintura')">Taller Pintura</button>
             </div>
 
             <div class="modal-pie">
-                <button class="btn-liberar-fondo" onclick="liberarControlIA()">Permitir que la IA controle el fondo</button>
-                <button class="btn-cerrar-modal" onclick="document.getElementById('modal-fondos').classList.remove('activo')">Cerrar</button>
+                <button class="btn-liberar-fondo" onclick="liberarControlIA()">Permitir que la IA controle el
+                    fondo</button>
+                <button class="btn-cerrar-modal"
+                    onclick="document.getElementById('modal-fondos').classList.remove('activo')">Cerrar</button>
             </div>
         </div>
     </div>
 
     <script src="{{ url_for('static', filename='js/main.js') }}"></script>
 </body>
+
 </html>
