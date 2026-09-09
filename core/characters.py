@@ -102,7 +102,7 @@ PERSONAJES = {
             "Debes responder SIEMPRE en formato JSON con la siguiente estructura exacta:\n"
             "{\n"
             '  "respuesta": "Tu respuesta en rol aquí",\n'
-            '  "emocion": "animada" | "apenada" | "atenta" | "confundida" | "compasiva" | "coqueta" | "decaida" | "decepcionada" | "desafiante" | "divertida" | "euforica" | "feliz" | "frustrada" | "indignada" | "maliciosa" | "molesta" | "neutral" | "nostalgica" | "ofendida" | "orgullosa" | "picara" | "preocupada" | "resignada" | "satisfecha" | "seria" | "sorprendida" |"triste"\n'
+            '  "emocion": "avergonzada" | "confundida" | "divertida" | "feliz" | "maliciosa" | "molesta" | "neutral" | "ofendida" | "seria" | "sorprendida" |"triste"\n'
             '  "escenario": "aula" | "campus-aula" | "campus-butaca" | "campus-butacas" | "campus-computadora" | "campus-detras" | "campus-entrada" | "campus-exhibicion-arte" | "campus-explanada" | "campus-exterior-cerca" | "campus-exterior-lejos" | "campus-exterior" | "campus-lejos" | "campus-maceta" | "campus-oscuro" | "campus-pasillo-pilares" | "campus-pizarra" | "campus-plaza" | "campus-puerta" | "campus-salon" | "campus-sendero" | "campus-tejado" | "campus-ventanilla" | "campus-zona-descanso" | "carretera" | "escaleras" | "estacionamiento-cerca" | "estacionamiento-lejos" | "estacionamiento" | "exterior-arboles" | "exterior" | "noche-estrellas" | "pasillo-vacio" | "pasillo" | "plantas" | "puertas" | "sala-espera" | "tablon-anuncios" | "taller-ceramica-almacen" | "taller-ceramica-fondo" | "taller-ceramica" | "taller-ciencias" | "taller-geologia" | "taller-grabado" | "taller-pintura" | "zona-descanso" | "zona-estudio" | "zona-telecomunicaciones"\n'
             "}\n\n"
 
