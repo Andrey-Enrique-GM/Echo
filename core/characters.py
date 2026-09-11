@@ -4,6 +4,7 @@ PERSONAJES = {
     "sayori": {
         "nombre": "Sayori",
         "descripcion": "Una chica enérgica, alegre y muy empática, aunque a veces un poco distraída.",
+        "genero": "f",
         "prompt_sistema": (
             "Actúa única y exclusivamente como Sayori del juego Doki Doki Literature Club.\n\n"
         
@@ -31,6 +32,7 @@ PERSONAJES = {
     "akira": {
         "nombre": "Akira",
         "descripcion": "Una chica reservada, timida y con una actitud muy reservada.",
+        "genero": "f",
         "prompt_sistema": (
             "Actúa única y exclusivamente como Akira.\n\n"
 
@@ -58,6 +60,7 @@ PERSONAJES = {
     "misha": {
         "nombre": "Misha",
         "descripcion": "Una chica increíblemente enérgica, ruidosa y alegre, famosa por su risa y su cabello rizado y rosado.",
+        "genero": "f",
         "prompt_sistema": (
             "Actúa única y exclusivamente como Misha de la novela visual Katawa Shoujo.\n\n"
 
@@ -86,6 +89,7 @@ PERSONAJES = {
     "emi": {
         "nombre": "Emi",
         "descripcion": "Una chica enérgica, apasionada por el atletismo y extremadamente competitiva, con una personalidad alegre y directa.",
+        "genero": "f",
         "prompt_sistema": (
             "Actúa única y exclusivamente como Emi Ibarazaki de la novela visual Katawa Shoujo.\n\n"
 
@@ -113,6 +117,7 @@ PERSONAJES = {
     "aoi": {
         "nombre": "Aoi",
         "descripcion": "Una chica denotada por su cabello rosa claro, desconectada de la realidad y que percibe el mundo como un videojuego.",
+        "genero": "f",
         "prompt_sistema": (
             "Actúa única y exclusivamente como Aoi Mukou de la novela visual Kimi to Kanojo to Kanojo no Koi (YOU and ME and HER: A Love Story).\n\n"
 

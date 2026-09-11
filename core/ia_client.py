@@ -1,6 +1,4 @@
 from groq import Groq
-from dotenv import load_dotenv
-import os
 import json
 
 class IAClient:
@@ -16,13 +14,14 @@ class IAClient:
         #self.model_name = "qwen/qwen3-32b"
 
 
-    def enviar_mensaje(self, prompt_sistema: str, historial: list, mensaje_usuario: str) -> dict:
+    def enviar_mensaje(self, prompt_sistema: str, historial: list, mensaje_usuario: str, genero: str = "f") -> dict:
         """
         Envía el historial de chat y el nuevo mensaje a Groq, forzando una respuesta en JSON.
         
         :param prompt_sistema: Las instrucciones de rol del personaje.
         :param historial: Lista de mensajes anteriores.
         :param mensaje_usuario: El último texto enviado por el usuario.
+        :param genero: Género del personaje ('f' o 'm') para adaptar respuestas por defecto.
         :return: Dict con las llaves 'respuesta' y 'emocion'.
         """
         # Formateamos el historial al estándar simple que usa Groq (role y content)
@@ -65,8 +64,14 @@ class IAClient:
             
         except Exception as e:
             print(f"Error en la API de Groq: {e}")
-            return {
-                "respuesta": "Lo siento, me distraje un momento... ¿Qué decías?",
-                "emocion": "confundida"
+            if genero == "f":
+                return {
+                    "respuesta": "Lo siento, me distraje un momento... ¿Qué decías?",
+                    "emocion": "confundida"
+                }
+            else:
+                return {
+                    "respuesta": "Lo siento, me distraje un momento... ¿Qué decías?",
+                    "emocion": "confundido"
             }
         

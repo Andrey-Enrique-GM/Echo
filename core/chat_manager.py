@@ -24,12 +24,14 @@ class ChatManager:
         self.historial = [] # Limpiamos historial previo, si existía
         
         info = PERSONAJES[id_personaje]
+        genero = info.get("genero", "f")
         
         # Le pedimos a la IA que genere el saludo inicial basado en su prompt_sistema
         primer_contacto = self.ia_client.enviar_mensaje(
             prompt_sistema=info["prompt_sistema"],
             historial=self.historial,
-            mensaje_usuario="Preséntate y salúdame de acuerdo a tu personaje de manera natural siguiendo el rol."
+            mensaje_usuario="Preséntate y salúdame de acuerdo a tu personaje de manera natural siguiendo el rol.",
+            genero=genero
         )
         
         # Guardamos el saludo del asistente en nuestro historial interno
@@ -46,6 +48,7 @@ class ChatManager:
             raise RuntimeError("No se ha seleccionado ningún personaje.")
             
         info = PERSONAJES[self.personaje_actual]
+        genero = info.get("genero", "f")
         
         # Primero guardamos el mensaje del usuario en el historial local
         self.historial.append({"role": "user", "text": mensaje_usuario})
@@ -54,7 +57,8 @@ class ChatManager:
         resultado = self.ia_client.enviar_mensaje(
             prompt_sistema=info["prompt_sistema"],
             historial=self.historial,
-            mensaje_usuario=mensaje_usuario
+            mensaje_usuario=mensaje_usuario,
+            genero=genero
         )
         
         # 2. Añadimos la respuesta de la IA usando el rol "assistant"
